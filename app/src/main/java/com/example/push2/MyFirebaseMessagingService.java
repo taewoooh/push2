@@ -61,7 +61,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         ((MainActivity)MainActivity.mContext).Tongsin(refreshedToken);
 
-       // new TWPreference(getApplicationContext()).putString("newtoken",refreshedToken);
+
 
     }
 
