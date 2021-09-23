@@ -57,12 +57,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onNewToken(String refreshedToken) {
         super.onNewToken(refreshedToken);
         Log.e(TAG, "Refreshed token: " + refreshedToken);
-        sendRegistrationToServer(refreshedToken);
+
+
+        ((MainActivity)MainActivity.mContext).Tongsin(refreshedToken);
+
+       // new TWPreference(getApplicationContext()).putString("newtoken",refreshedToken);
+
     }
 
-    private void sendRegistrationToServer(String token) {
-        Log.e(TAG, "here ! sendRegistrationToServer! token is " + token);
-    }
 
 
 }
