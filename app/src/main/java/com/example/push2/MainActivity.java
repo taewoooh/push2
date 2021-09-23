@@ -1,5 +1,6 @@
 package com.example.push2;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.firebase.iid.FirebaseInstanceId;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -28,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
     Retrofit retrofit;
     public static Context mContext;
 
+    String TAG ="MainActivity";
     int anInt=0;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +42,25 @@ public class MainActivity extends AppCompatActivity {
 
         mContext = this;
 
-        String token = FirebaseInstanceId.getInstance().getToken();
-        Log.e("========== PUSH ID ========", "" + token);
-       // Toast.makeText(MainActivity.this, "PUSH ID :::" + token, Toast.LENGTH_SHORT).show();
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
 
+                        // Get new FCM registration token
+                        token = task.getResult();
 
+                        // Log and toast
 
+                        Log.d(TAG, token);
+                       // Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "token / "+token);
+                    }
+                });
 
 
 
