@@ -6,10 +6,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -23,7 +25,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMsgService";
 
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) { // Handle FCM Message Log.e(TAG, remoteMessage.getFrom()); // Check if message contains a data payload.
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+
+
+
+
+
+
+
+        // Handle FCM Message Log.e(TAG, remoteMessage.getFrom()); // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
             Log.e(TAG, "Message data payload: " + remoteMessage.getData());
             handleNow();
@@ -45,6 +55,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     }
+
+
+
 
     private void handleNow() {
         Log.d(TAG, "Short lived task is done.");
